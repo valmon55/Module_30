@@ -78,7 +78,7 @@ let logger = function () {
 
 function filterContent(){
     let elements = document.getElementsByClassName('video-container');
-    debugger;
+
     for (let i = 0; i < elements.length; i++ ){
         let videoText = elements[i].getElementsByTagName('h3')[0].innerText;
 
