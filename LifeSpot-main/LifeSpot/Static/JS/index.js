@@ -2,8 +2,14 @@
 * Сессия теперь создается в общей области видимости.
 * Будет "захватываться" тремя функциями
 * 
-* */ 
-let session =  new Map();
+* */
+//let session =  new Map();
+//используем объект
+let session = {
+    "startDate": new Date().toLocaleString(),
+    "userAgent": window.navigator.userAgent,
+    "userAge": prompt("Пожалуйста, введите ваш возраст?")
+};
 
 /*
 * Сохранение данных сессии сразу при заходе пользователя на страницу
@@ -21,9 +27,8 @@ function handleSession(){
 * 
 * */
 function checkAge(){
-    session.set("age", prompt("Пожалуйста, введите ваш возраст?"))
     
-    if(session.get("age") >= 18){
+    if (session["userAge"] >= 18){
         alert("Приветствуем на LifeSpot! " + '\n' +  "Текущее время: " + new Date().toLocaleString() );
     }
     else{
@@ -38,9 +43,9 @@ function checkAge(){
 * 
 * */
 let sessionLog = function () {
-    for (let result of session){
-        console.log(result)
-    }
+    console.log('Начало сессии: ' + session.startDate);
+    console.log('Данные клиента: ' + session.userAgent);
+    console.log('Возраст пользователя: : ' + session.userAge);
 }
 
 /*
