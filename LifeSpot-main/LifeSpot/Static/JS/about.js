@@ -3,24 +3,28 @@
 * и сохраним отзыв в объект
 * 
 * */
+function Comment(author, text) {
+    this.author = author,
+        this.text = text,
+        this.date = new Date().toLocaleString()
+}
 function getComment() {
     // Создадим объект
-    let comment = {};
-    
     // Сохраним свойство имени
-    comment.author = prompt("Как вас зовут ?")
-    if (comment.author == null){
+    let author = prompt("Как вас зовут ?")
+    if (author == null){
         return
     }
-    
+    debugger;
     // Сохраним текст отзыва
-    comment.text = prompt("Напишите свой отзыв")
-    if (comment.text == null) {
+    let text = prompt("Напишите свой отзыв")
+    if (text == null) {
         return
     }
-    
+    let comment = new Comment(author,text);
+
     // Сохраним текущее время
-    comment.date = new Date().toLocaleString();
+    //comment.date = new Date().toLocaleString();
     let enableLikes = confirm('Разрешить пользователям оценивать ваш отзыв?')
 
     if (enableLikes) {
