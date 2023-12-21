@@ -1,42 +1,53 @@
 ﻿/*
-* Запросим пользовательский ввод
-* и сохраним отзыв в объект
-* 
+* Конструктор, через который создаётся комментарий
+*
 * */
-function Comment(author, text) {
-    this.author = author,
-        this.text = text,
-        this.date = new Date().toLocaleString()
-}
-function getComment() {
-    // Создадим объект
-    // Сохраним свойство имени
-    let author = prompt("Как вас зовут ?")
-    if (author == null){
+function Comment() {
+    // Запросим имя
+    this.author = prompt("Как вас зовут ?")
+    if (this.author == null) {
+        this.empty = true
         return
     }
-    debugger;
-    // Сохраним текст отзыва
-    let text = prompt("Напишите свой отзыв")
-    if (text == null) {
+
+    // Запросим текст
+    this.text = prompt("Оставьте отзыв")
+    if (this.text == null) {
+        this.empty = true
         return
     }
-    let comment = new Comment(author,text);
 
     // Сохраним текущее время
-    //comment.date = new Date().toLocaleString();
+    this.date = new Date().toLocaleString()
+}
+/*
+* Оставить комментарий
+*
+* */
+function addComment() {
+    let comment = new Comment()
+
+    // проверяем, успешно ли юзер осуществил ввод
+    if (comment.empty) {
+        return;
+    }
+
+    // Запросим, хочет ли пользователь оставить полноценный отзыв или это будет обычный комментарий
     let enableLikes = confirm('Разрешить пользователям оценивать ваш отзыв?')
 
     if (enableLikes) {
-        review = Object.create(comment);
+        // Создадим для отзыва новый объект из прототипа - комментария
+        let review = Object.create(comment)
+        // и добавим ему нужное свойство
         review.rate = 0;
+
+        // Добавляем отзыв с возможностью пользовательских оценок
         writeReview(review)
-    }
-    else {
+    } else {
+        // Добавим простой комментарий без возможности оценки
         writeReview(comment)
     }
 }
-
 /*
 * Запишем отзыв на страницу 
 * 
